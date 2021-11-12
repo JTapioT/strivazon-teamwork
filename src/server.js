@@ -6,6 +6,7 @@ import reviewRouter from "./reviews/index.js";
 import { badRequest, unAuthorized, notFound, genericError } from "./errorsHandler.js";
 import productsRouter from "./APIs/products/index.js";
 import cartsRouter from "./services/carts/index.js";
+import customersRouter from "./services/users/index.js";
 
 
 
@@ -17,6 +18,7 @@ server.use(express.json());
 
 // ROUTES
 
+server.use("/customers", customersRouter);
 server.use("/cart", cartsRouter);
 server.use('/products', productsRouter)
 server.use("/reviews", reviewRouter)
@@ -32,8 +34,9 @@ server.use(genericError);
 
 const { PORT, MONGO_CONNECTION } = process.env;
 
+// const connect = `mongodb+srv://test-zee:h6S9I878MAMU1RH5@zeecluster.hzdrr.mongodb.net/Strive_Amazon?retryWrites=true&w=majority`
 
-mongoose.connect(process.env.MONGO_CONNECTION); 
+mongoose.connect(MONGO_CONNECTION); 
 
 mongoose.connection.on("connected", () => {
 server.listen(PORT, () => {

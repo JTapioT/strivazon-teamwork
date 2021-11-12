@@ -8,6 +8,8 @@ const cartsRouter = express.Router();
 
 
 
+cartsRouter.get("/:customerId", cart.getCustomerCart);
+
 cartsRouter.post("/:customerId/addToCart", cart.addToCart);
 // cartsRouter.get() ??
 cartsRouter.delete("/:customerId/remove/:productId", cart.deleteFromCart);
