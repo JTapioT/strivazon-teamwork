@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
-import reviewRouter from "./reviews";
+import reviewRouter from "./reviews/index.js";
 
 const server = express();
 
@@ -23,9 +23,12 @@ const { PORT } = process.env;
 
 
 mongoose.connect(process.env.MONGODB_URI); // NEED ONE MONGO DB CONNECTION FROM SOMEONE.
-mongoose.connection.on(connected, () => {
+
+mongoose.connection.on("connected", () => {
 server.listen(PORT, () => {
     console.table(listEndpoints(server));
     console.log("Server is running on port:", PORT);
   });
 });
+
+mongoose.connection.on('error', (err) => console.log(err))

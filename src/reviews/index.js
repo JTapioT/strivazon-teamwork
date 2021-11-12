@@ -21,7 +21,7 @@ reviewRouter.post("/",async(req,res,next)=>{
  // get all the reviews
  reviewRouter.get("/",async(req,res,next)=>{
     try {
-        const reviews = await ReviewModel.find()
+        const reviews = await ReviewModel.find().populate({path:"productId", select:"_id" })
         
         res.status(200).send(reviews )
 
@@ -78,4 +78,4 @@ reviewRouter.put("/:reviewId",async(req,res,next)=>{
     }
 })
 
-export default riewRouter
+export default reviewRouter

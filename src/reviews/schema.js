@@ -6,8 +6,10 @@ const { Schema, model} = mongoose
 const ReviewSchema = new Schema({
     comment:{type:String, required:true},
     rate:{type:Number,required:true},
-    productId:{type:String, required:true}
-
+    productId: [{
+        type: Schema.Types.ObjectId,
+        ref: "Product"
+    }],
 },
 {
     timestamps:true
