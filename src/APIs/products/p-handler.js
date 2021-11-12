@@ -1,4 +1,5 @@
 import ProductModel from "./schema.js";
+import ReviewModel from "../../reviews/schema.js"
 import q2m from "query-to-mongo";
 
 // CREATE NEW PRODUCT
@@ -39,8 +40,8 @@ const getAll = async (req, res, next) => {
     const post = await ProductModel.find(mongoQuery.criteria)
       .limit(mongoQuery.options.limit)
       .skip(mongoQuery.options.skip)
-      .sort(mongoQuery.options.sort);
-    //   .populate({ path: "reviews", select: "firstName lastName" });
+      .sort(mongoQuery.options.sort)
+      .populate({ path: "reviews", select: "comment rate"})
 
     res.send({
       links: mongoQuery.links("/products", total),
@@ -53,6 +54,8 @@ const getAll = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 const getById = async (req, res, next) => {
   try {
@@ -90,6 +93,9 @@ const deleteProduct = async (req, res, next) => {
   }
 };
 
+
+
+
 const productsHandler = {
   createProduct,
   getAll,
@@ -97,6 +103,6 @@ const productsHandler = {
   getById,
   updateProduct,
   deleteProduct,
-};
+}
 
 export default productsHandler;

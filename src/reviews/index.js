@@ -1,10 +1,9 @@
 import express from "express"
 import ReviewModel from "./schema.js"
-import HttpError  from "http-errors"
+import ProductModel from "../APIs/products/schema.js"
 import createHttpError from "http-errors"
 
 const reviewRouter = express.Router()
-
 
 // to post the review
 reviewRouter.post("/",async(req,res,next)=>{
@@ -13,7 +12,7 @@ reviewRouter.post("/",async(req,res,next)=>{
         const review = await ReviewModel(req.body)
         const {_id} = await review.save()
         res.status(201).send({_id})
-        
+
     } catch (error) {
         next(error)
     }
@@ -21,11 +20,10 @@ reviewRouter.post("/",async(req,res,next)=>{
  // get all the reviews
  reviewRouter.get("/",async(req,res,next)=>{
     try {
-        const reviews = await ReviewModel.find().populate({path:"productId", select:"_id" })
-        
+        const reviews = await ReviewModel.find()
+
         res.status(200).send(reviews )
 
-        
     } catch (error) {
         next(error)
     }
@@ -37,7 +35,7 @@ reviewRouter.get("/:reviewId",async(req,res,next)=>{
         const id = req.params.reviewId
         const review = await ReviewModel.findById(id)
         res.status(200).send(review )
-        
+
     } catch (error) {
         next(error)
     }
@@ -55,12 +53,10 @@ reviewRouter.put("/:reviewId",async(req,res,next)=>{
             next(createHttpError(`review with id ${req.params.reviewId} not found !`))
         }
 
-    
-        
     } catch (error) {
         next(error)
     }
-}) 
+})
  // delete the reviews by reviewId
  reviewRouter.delete("/:reviewId",async(req,res,next)=>{
     try {
@@ -71,8 +67,7 @@ reviewRouter.put("/:reviewId",async(req,res,next)=>{
         } else{
             next(createHttpError(`review with id ${req.params.reviewId} not found !`))
         }
-       
-        
+
     } catch (error) {
         next(error)
     }
