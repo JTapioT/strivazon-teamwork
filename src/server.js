@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
-
+import reviewRouter from "./reviews";
 
 const server = express();
 
@@ -11,6 +11,8 @@ server.use(cors());
 server.use(express.json());
 
 // ROUTES
+
+server.use("/reviews",reviewRouter)
 
 
 // ERROR-HANDLING MIDDLEWARE
