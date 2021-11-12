@@ -93,15 +93,7 @@ const updateReview = async (req, res, next) => {
     if (product) {
       const updatedReview = await ReviewModel.findByIdAndUpdate(req.params.reviewId, req.body, {new:true})
       console.log(updatedReview)
-    //  const  index = product.reviews.findIndex((r) => r._id.toString() === req.params.reviewId);
-    //  console.log(index)
-    //  console.log(product.reviews[index], '========= inside update rewview')
 
-    //   if (index !== -1) {
-    //     product.reviews[index] = {
-    //       ...product.reviews[index].toObject(),
-    //       ...req.body,
-    //     };
         await product.save();
         res.status(203).send(updatedReview);
       } else {
@@ -118,18 +110,11 @@ const updateReview = async (req, res, next) => {
 // DELETE A REVIEW
 const deleteReview = async (req, res, next) => {
   try {
-    console.log('DELETE REVIEW ======================================')
-    console.log('i am the req params', req.params.productId)
-    console.log('i am the req params review', req.params.reviewId)
+
 
     const deletedReview = await ReviewModel.findByIdAndDelete(req.params.reviewId)
     console.log(deletedReview)
-    // const deletedReview = await ProductModel.findByIdAndUpdate(
-    //   req.params.productId,
-    //   { $pull: { reviews: { _id: req.params.reviewId } } }, 
-    //   { new: true }
-    // );
-    // console.log(deletedReview)
+
     if (deletedReview) {
       res.send({deletedReview});
     } else {
