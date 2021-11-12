@@ -34,7 +34,6 @@ server.use(genericError);
 
 const { PORT, MONGO_CONNECTION } = process.env;
 
-// const connect = `mongodb+srv://test-zee:h6S9I878MAMU1RH5@zeecluster.hzdrr.mongodb.net/Strive_Amazon?retryWrites=true&w=majority`
 
 mongoose.connect(MONGO_CONNECTION); 
 
