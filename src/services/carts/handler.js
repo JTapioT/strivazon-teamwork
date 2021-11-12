@@ -1,6 +1,6 @@
 import CartModel from "./schema.js";
 import createHttpError from "http-errors";
-import ProductModel from "../product/schema.js"
+import ProductModel from "../../APIs/products/schema.js"
 
 
 async function addToCart(req,res,next) {
@@ -86,7 +86,9 @@ async function deleteFromCart(req,res,next) {
   }
 };
 
-export const cart  = {
+const cart  = {
   addToCart,
   deleteFromCart
 }
+
+export default cart
