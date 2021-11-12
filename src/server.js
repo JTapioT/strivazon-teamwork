@@ -5,6 +5,8 @@ import mongoose from "mongoose";
 import reviewRouter from "./reviews/index.js";
 import { badRequest, unAuthorized, notFound, genericError } from "./errorsHandler.js";
 import productsRouter from "./APIs/products/index.js";
+import cartsRouter from "./services/carts/index.js";
+
 
 
 const server = express();
@@ -14,6 +16,8 @@ server.use(cors());
 server.use(express.json());
 
 // ROUTES
+
+server.use("/cart", cartsRouter);
 server.use('/products', productsRouter)
 server.use("/reviews", reviewRouter)
 
@@ -25,17 +29,17 @@ server.use(notFound);
 server.use(genericError);
 
 
+
 const { PORT, MONGO_CONNECTION } = process.env;
 
 
-
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGO_CONNECTION); 
 
 mongoose.connection.on("connected", () => {
+server.listen(PORT, () => {
   console.log('We are live boys 🟡 🟢')
-  server.listen(PORT, () => {
-    console.table(listEndpoints(server));
-    console.log("Server is running on port:", PORT);
+  console.table(listEndpoints(server));
+  console.log("Server is running on port:", PORT);
   });
 });
 
