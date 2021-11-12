@@ -41,7 +41,7 @@ const getAll = async (req, res, next) => {
       .limit(mongoQuery.options.limit)
       .skip(mongoQuery.options.skip)
       .sort(mongoQuery.options.sort)
-      .populate({ path: "reviews", select: "comment rate"})
+      .populate({ path: "reviews", select: "comment rate"}) // This is working
 
     res.send({
       links: mongoQuery.links("/products", total),

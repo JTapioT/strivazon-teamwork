@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
-import reviewRouter from "./reviews/index.js";
+// import reviewRouter from "./reviews/index.js";
 import { badRequest, unAuthorized, notFound, genericError } from "./errorsHandler.js";
 import productsRouter from "./APIs/products/index.js";
 import cartsRouter from "./services/carts/index.js";
@@ -19,7 +19,7 @@ server.use(express.json());
 
 server.use("/cart", cartsRouter);
 server.use('/products', productsRouter)
-server.use("/reviews", reviewRouter)
+// server.use("/reviews", reviewRouter)
 
 
 // ERROR-HANDLING MIDDLEWARE

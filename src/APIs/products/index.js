@@ -19,6 +19,15 @@ productsRouter.get("/", productsHandler.getAll)
 
 productsRouter.post("/", productsHandler.createProduct)
 
+//***************************************** REVIEW ROUTE ***************************************/
+productsRouter.post("/:productId/reviews", reviewHandler.postReview)
+productsRouter.get("/:productId/reviews", reviewHandler.getReviewsByProductId)
+
+productsRouter.route("/:productId/reviews/:reviewId")
+.get(reviewHandler.getReviewById)
+.put(reviewHandler.updateReview)
+.delete(reviewHandler.deleteReview)
+
 productsRouter.put("/:id", multer({ storage: cloudinaryStorage}).single('image'), productsHandler.uploadImage)
 
 productsRouter.route("/:id") 
@@ -26,10 +35,6 @@ productsRouter.route("/:id")
 .put(productsHandler.updateProduct)
 .delete(productsHandler.deleteProduct)
 
-//***************************************** REVIEW ROUTE ***************************************/
-productsRouter.post("/:productId/reviews", reviewHandler.postReview)
-productsRouter.get("/:productId/reviews", reviewHandler.getReviewsByProductId)
-productsRouter.route("/:productId/reviews/:reviewId")
-.get(reviewHandler.getCommentById)
+
 
 export default productsRouter
