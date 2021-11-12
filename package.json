@@ -1,7 +1,6 @@
 {
   "name": "strivazon-teamwork",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -27,5 +26,14 @@
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.15"
   },
-  "type": "module"
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JTapioT/strivazon-teamwork.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JTapioT/strivazon-teamwork/issues"
+  },
+  "homepage": "https://github.com/JTapioT/strivazon-teamwork#readme",
+  "description": ""
 }
