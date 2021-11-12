@@ -3,6 +3,9 @@ import cors from "cors";
 import listEndpoints from "express-list-endpoints";
 import mongoose from "mongoose";
 
+import cartsRouter from "./services/carts/index.js";
+
+
 
 const server = express();
 
@@ -11,7 +14,7 @@ server.use(cors());
 server.use(express.json());
 
 // ROUTES
-
+server.use("cart/", cartsRouter);
 
 // ERROR-HANDLING MIDDLEWARE
 
@@ -21,7 +24,7 @@ const { PORT } = process.env;
 
 
 mongoose.connect(process.env.MONGODB_URI); // NEED ONE MONGO DB CONNECTION FROM SOMEONE.
-mongoose.connection.on(connected, () => {
+mongoose.connection.on("connected", () => {
 server.listen(PORT, () => {
     console.table(listEndpoints(server));
     console.log("Server is running on port:", PORT);
